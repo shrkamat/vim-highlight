@@ -248,6 +248,7 @@ call HighlightInit()
 
 
 command! -nargs=1 Highlight call Highlight(<q-args>)
+command! -nargs=2 HighlightCustom call Highlight(<q-args>)
 
 
 autocmd ColorScheme * :call HighlightInit()

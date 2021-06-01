@@ -140,6 +140,22 @@ function! Highlight(mode)
 
 endfunction
 
+" Highlight: HighlightCustom
+function! HighlightCustom(mode, cur_word)
+   " Line mode
+
+   " Pattern mode
+   if cur_word == ""
+      " do nothing
+   else a:mode == 'l'
+      let s:pcolor_n = s:pcolor_n == s:pcolor_max - 1 ?  1 : s:pcolor_n + 1
+      exec 'syn match ' . s:pcolor_grp . s:pcolor_n . ' ".*\<' . cur_word . '\>.*" containedin=ALL'
+   else
+   endif
+
+endfunction
+
+
 " Strntok: Utility function to implement C-like strntok() by Michael Geddes
 " and Benji Fisher at http://groups.yahoo.com/group/vimdev/message/26788
 function! s:Strntok( s, tok, n)

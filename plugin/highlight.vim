@@ -141,17 +141,15 @@ function! Highlight(mode)
 endfunction
 
 " Highlight: HighlightCustom
-function! HighlightCustom(mode, cur_word)
-   " Line mode
+function! HighlightCustom(cur_word)
+    " Line mode
+ 
+    echo "======="
+    echo a:cur_word
+    echo "======="
 
-   " Pattern mode
-   if cur_word == ""
-      " do nothing
-   else a:mode == 'l'
-      let s:pcolor_n = s:pcolor_n == s:pcolor_max - 1 ?  1 : s:pcolor_n + 1
-      exec 'syn match ' . s:pcolor_grp . s:pcolor_n . ' ".*\<' . cur_word . '\>.*" containedin=ALL'
-   else
-   endif
+    let s:pcolor_n = s:pcolor_n == s:pcolor_max - 1 ?  1 : s:pcolor_n + 1
+    exec 'syn match ' . s:pcolor_grp . s:pcolor_n . ' ".*\<' . a:cur_word . '\>.*" containedin=ALL'
 
 endfunction
 
@@ -248,7 +246,7 @@ call HighlightInit()
 
 
 command! -nargs=1 Highlight call Highlight(<q-args>)
-command! -nargs=2 HighlightCustom call Highlight(<q-args>)
+command! -nargs=1 HighlightCustom call HighlightCustom(<f-args>)
 
 
 autocmd ColorScheme * :call HighlightInit()
